@@ -117,7 +117,7 @@ class Casino:
             else:
                 break
         print("[******** - Horse Betting Special Rules - ********]")
-        print("1st Place: x5 Multiplier \n 2nd Place: x2 Multiplier \n 3rd Place: No Money Loss \n Last Place: Double Loss")
+        print("1st Place: x7.5 Multiplier \n 2nd Place: x4 Multiplier \n 3rd Place: No Money Loss \n Last Place: Double Loss")
 
         while True:
             try:
@@ -137,10 +137,10 @@ class Casino:
         
         if winners[0] == selected_horse:
             print("🎉Congratulations you came in 1st place!!")
-            self.player.wallet += bet*5
+            self.player.wallet += bet*7.5
         elif winners[1] == selected_horse:
             print("🎉Congratulations you came in 2nd place!!")
-            self.player.wallet += bet*2
+            self.player.wallet += bet*4
         elif winners[2] == selected_horse:
             print("🎉Congratulations you came in 3rd place!!")
         elif last_place == selected_horse:
@@ -210,12 +210,12 @@ class Casino:
                 
                 if stbet  == 2:
                     print("You chose to STAND")
-                    break
                 elif stbet ==1:
                     print("You chose to HIT")
                     new_card = random.randint(1, 11)
                     player_total += new_card
                     print(f"You drew a {new_card}. Your new total is {player_total}.")
+                    time.sleep(2)
 
                     if player_total  > 21:
                         print("BUST! Your total is over 21. You lose.")
@@ -227,13 +227,13 @@ class Casino:
             if player_total <=21:
                 print("\nDealer's turn.")
                 print(f"Dealer's hidden card was {dealer_second_card}, total: {dealer_total}")
-                time.sleep(1)
+                time.sleep(2)
             
-            while dealer_total  < 17:
+            if dealer_total  < 17:
                 new_card = random.randint(1,11)
                 dealer_total += new_card
                 print(f"Dealer draws a {new_card}. Dealer's total is now {dealer_total}.")
-                time.sleep(1)
+                time.sleep(2)
 
             # Determine the outcome
             print("\nFinal Results:")
@@ -250,6 +250,7 @@ class Casino:
             else:
                 print("Dealer wins. You lose.")
                 self.player.wallet -= lost
+            time.sleep(2)
             break
 
 
@@ -429,7 +430,7 @@ def main_menu(casino):
             print("[******** - WELCOME TO MARS GRAND CASINO - ********]")
             print("************************************************")
             print("\n")
-            print(f"Current Balance: ${player.wallet}")
+            print(f"Current Balance: ${player.wallet: .2f}")
             print("\n")
             print("************************************************")
             print("What would you like to do?")
@@ -456,6 +457,7 @@ def main_menu(casino):
                     casino.purchase_item()
                 elif choice == 6:
                     print(casino.player)  # This will print the player’s current wallet balance and purchased items
+                    time.sleep(2.5)
                 elif choice == 7:
                     print("Thank you for visiting the Mars Grand Casino! Come back soon!")
                     break  # Exit the loop and end the game
